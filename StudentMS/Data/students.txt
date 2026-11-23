@@ -1,0 +1,62 @@
+1|Thabo|Mokoena|13|7|78.5
+Mathematics,85
+English,72
+Natural Sciences,79
+Social Sciences,78
+
+2|Amahle|Nkosi|12|6|85.2
+Mathematics,91
+English,83
+Natural Sciences,82
+Social Sciences,85
+Creative Arts,85
+
+3|Sipho|Dlamini|14|8|64.8
+Mathematics,58
+English,70
+Natural Sciences,65
+Social Sciences,66
+Technology,65
+
+4|Zanele|Khumalo|13|7|91.3
+Mathematics,95
+English,89
+Natural Sciences,92
+Social Sciences,89
+
+5|Luthando|Madikizela|12|6|56.7
+Mathematics,48
+English,62
+Natural Sciences,55
+Social Sciences,62
+
+6|Naledi|Molefe|14|8|73.9
+Mathematics,70
+English,78
+Natural Sciences,75
+Social Sciences,72
+Technology,74
+
+7|Sibusiso|Ndlovu|13|7|68.4
+Mathematics,65
+English,72
+Natural Sciences,66
+Social Sciences,71
+
+8|Ayanda|Mthembu|12|6|88.6
+Mathematics,92
+English,87
+Natural Sciences,90
+Social Sciences,85
+
+9|Bonga|Hadebe|14|8|49.5
+Mathematics,42
+English,55
+Natural Sciences,48
+Social Sciences,53
+
+10|Lerato|Tshabalala|13|7|82.1
+Mathematics,85
+English,80
+Natural Sciences,83
+Social Sciences,81
