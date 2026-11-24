@@ -2,11 +2,12 @@
 
 namespace StudentMS.Services
 {
-    public class StudentFileService
+    public class StudentFileService 
     {
         private readonly string _filePath;
+        private string _logger;
 
-        public StudentFileService(string filePath)
+        public StudentFileService(string filePath, string logger)
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
@@ -14,11 +15,13 @@ namespace StudentMS.Services
 
             }
             _filePath = filePath;
+            _logger = logger;
         }
         public Student LoadStudent()
         {
             try
             {
+
                 var lines = File.ReadAllLines(_filePath);
 
                 var studentLine = lines[0];
