@@ -9,9 +9,9 @@
         public int Age { get; set; }
         public int Grade { get; set; }
         public List<Subject> subjects { get; set; }
-        //public decimal AvgMark { get;}
+        public decimal AvgMark { get; }
 
-        public Student(int id, string name, string surname, int age, int grade, List<Subject> subjects)
+        public Student(int id, string name, string surname, int age, int grade, decimal avgMark, List<Subject> subjects)
         {
             ID = id;
             Name = name;
@@ -19,7 +19,7 @@
             Age = age;
             Grade = grade;
             this.subjects = subjects;
-            //AvgMark = avgMark;
+            AvgMark = avgMark;
         }
     }
 }
