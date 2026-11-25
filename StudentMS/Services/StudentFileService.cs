@@ -5,9 +5,9 @@ namespace StudentMS.Services
     public class StudentFileService 
     {
         private readonly string _filePath;
-        private string _logger;
+        private readonly StudentLogger _logger;
 
-        public StudentFileService(string filePath, string logger)
+        public StudentFileService(string filePath, StudentLogger logger)
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
@@ -98,19 +98,24 @@ namespace StudentMS.Services
             }
             catch (StudentException ex)
             {
-                LogError($"StudentException: {ex.Message}");
+                Console.WriteLine($"StudentException: {ex.Message}");
                 throw;
             }
             catch (Exception ex)
             {
-                LogError($"Exception: {ex.Message}");
-                throw new StudentException("An error occurred while loading the student data.", ex);
+                try
+                {
+                    _logger.LogError(ex, "logs.txt");
+                    Console.WriteLine($"An error ocurred while processing the file {_filePath}. Details have been logged to error.log");
+
+                }
+                catch (Exception logEx)
+                {
+                    Console.WriteLine($"Failed to log error for file {_filePath}. Exception: {logEx.Message}");
+                    throw;
+                }
+                throw;
             }
         }
-        private void LogError(string message)
-        {
-            File.AppendAllText("logs.txt", $"[{DateTime.Now}] {message}{Environment.NewLine}");
-        }
-
     }
 }

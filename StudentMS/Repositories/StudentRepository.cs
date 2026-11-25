@@ -6,10 +6,6 @@ namespace StudentMS.Repositories
         private List<Student> _students = new();
         public void AddStudent(Student student)
         {
-            if (student == null)
-            {
-                throw new ArgumentNullException(nameof(student));
-            }
             _students.Add(student);
         }
         public Student GetById(int id)
@@ -19,6 +15,26 @@ namespace StudentMS.Repositories
         public IEnumerable<Student> GetAll()
         {
             return _students;
+        }
+        public IEnumerable<Student> GetPassingStudents()
+        {
+            foreach (var student in _students)
+            {
+                if (student.GetAcademic() != "Fail")
+                {
+                    yield return student;
+                }
+            }
+        }
+        public IEnumerable<Student> GetFailingStudents()
+        {
+            foreach (var student in _students)
+            {
+                if (student.GetAcademic() == "Fail")
+                {
+                    yield return student;
+                }
+            }
         }
         public IQueryable<Student> Query()
         {
@@ -34,13 +50,17 @@ namespace StudentMS.Repositories
             if (existingStudent != null)
             {
                 existingStudent.Name = value.Name;
+                existingStudent.Surname = value.Surname;
                 existingStudent.Age = value.Age;
+                existingStudent.Grade = value.Grade;
+                existingStudent.subjects = value.subjects;
             }
             else
             {
                 throw new StudentException($"Student with ID {value.ID} not found.", value.ID);
             }
         }
+
         public void Delete(Student value)
         {
             var existingStudent = GetById(value.ID);
