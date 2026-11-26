@@ -17,11 +17,10 @@ namespace StudentMS.Services
             _filePath = filePath;
             _logger = logger;
         }
-        public Student LoadStudent()
+        public async Task<Student> LoadStudentAsync()
         {
             try
             {
-
                 var lines = File.ReadAllLines(_filePath);
 
                 var studentLine = lines[0];
