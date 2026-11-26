@@ -18,23 +18,19 @@ namespace StudentMS.Repositories
         }
         public IEnumerable<Student> GetPassingStudents()
         {
-            foreach (var student in _students)
-            {
-                if (student.GetAcademic() != "Fail")
-                {
-                    yield return student;
-                }
-            }
+            return _students.Where(p => p.GetAcademic() != "Fail");
         }
         public IEnumerable<Student> GetFailingStudents()
         {
-            foreach (var student in _students)
-            {
-                if (student.GetAcademic() == "Fail")
-                {
-                    yield return student;
-                }
-            }
+            return _students.Where(f => f.GetAcademic() == "Fail");
+        }
+        public IEnumerable<Student> GetGradeStudents(int grade)
+        {
+            return _students.Where(f => f.Grade == grade);
+        }
+        public IEnumerable<IGrouping<int, Student>> GetStudentsByGrade()
+        {
+            return _students.GroupBy(g => g.Grade);
         }
         public IQueryable<Student> Query()
         {
@@ -71,6 +67,13 @@ namespace StudentMS.Repositories
             else
             {
                 throw new StudentException($"Student with ID {value.ID} not found.", value.ID);
+            }
+        }
+        public void ProcessStudents(IEnumerable<Student> students, Action<Student> action)
+        {
+            foreach (Student student in students)
+            {
+                action(student);
             }
         }
     }
