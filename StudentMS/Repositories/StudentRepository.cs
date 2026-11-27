@@ -16,6 +16,14 @@ namespace StudentMS.Repositories
         {
             return _students;
         }
+        public IEnumerable<Subject> GetAllSubjects()
+        {
+            return _students.SelectMany(m  => m.Subjects);
+        }
+        public IEnumerable<string> GetStudentNames()
+        {
+            return _students.Select(s => s.Name);
+        }
         public IEnumerable<Student> GetPassingStudents()
         {
             return _students.Where(p => p.GetAcademic() != "Fail");
@@ -49,7 +57,7 @@ namespace StudentMS.Repositories
                 existingStudent.Surname = value.Surname;
                 existingStudent.Age = value.Age;
                 existingStudent.Grade = value.Grade;
-                existingStudent.subjects = value.subjects;
+                existingStudent.Subjects = value.Subjects;
             }
             else
             {

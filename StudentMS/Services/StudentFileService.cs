@@ -17,11 +17,11 @@ namespace StudentMS.Services
             _filePath = filePath;
             _logger = logger;
         }
-        public async Task<Student> LoadStudentAsync()
+        public async Task<Student> LoadStudentAsync(CancellationToken token)
         {
             try
             {
-                var lines = File.ReadAllLines(_filePath);
+                var lines = await File.ReadAllLinesAsync(_filePath, token);
 
                 var studentLine = lines[0];
 
@@ -65,13 +65,6 @@ namespace StudentMS.Services
                     throw new StudentException("Student grade must be between 0 and 12");
                 }
 
-                decimal avgMark = decimal.Parse(parts[5]);
-                if (avgMark < 0 || avgMark > 100)
-                {
-                    throw new StudentException("Student average marks must be between 0 and 100");
-                }
-
-
                 for (int i = 1; i < lines.Length; i++)
                 {
                     var subjectParts = lines[i].Split(',');
@@ -93,10 +86,12 @@ namespace StudentMS.Services
 
                     subjects.Add(new Subject(_name, _marks));
                 }
-                return new Student(id, name, surname, age, grade, avgMark, subjects);
+                return new Student(id, name, surname, age, grade, subjects);
             }
             catch (StudentException ex)
             {
+                await _logger.LogErrorAsync(ex, "logs.txt");
+
                 Console.WriteLine($"StudentException: {ex.Message}");
                 throw;
             }
@@ -104,7 +99,8 @@ namespace StudentMS.Services
             {
                 try
                 {
-                    _logger.LogError(ex, "logs.txt");
+                    await _logger.LogErrorAsync(ex, "logs.txt");
+
                     Console.WriteLine($"An error ocurred while processing the file {_filePath}. Details have been logged to error.log");
 
                 }

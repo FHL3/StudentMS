@@ -2,10 +2,10 @@
 {
     public class StudentLogger
     {
-        public void LogError(Exception ex, string filePath)
+        public async Task LogErrorAsync(Exception ex, string filePath)
         {
             using StreamWriter w = new StreamWriter(filePath, true);
-            w.WriteLine($"{DateTime.Now}: {ex.Message} {ex.GetType().Name}");
+            await w.WriteLineAsync($"{DateTime.Now}: {ex.Message} {ex.GetType().Name}");
         }
     }
 }

@@ -8,5 +8,7 @@ namespace StudentMS.Repositories
         IEnumerable<Student> GetFailingStudents();
         IEnumerable<Student> GetGradeStudents(int grade);
         IEnumerable<IGrouping<int, Student>> GetStudentsByGrade();
+        IEnumerable<string> GetStudentNames();
+        IEnumerable<Subject> GetAllSubjects();
     }
 }
