@@ -7,6 +7,7 @@
         string surname;
         int age;
         int grade;
+        decimal avgMark;
         List<Subject> subjects;
     }
 }

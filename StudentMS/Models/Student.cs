@@ -1,25 +1,48 @@
 ﻿namespace StudentMS.Models
 {
-    public class Student
+    public class Student(int id, string name, string surname, int age, int grade, decimal avgMark, List<Subject> subjects)
     {
 
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int Age { get; set; }
-        public int Grade { get; set; }
-        public List<Subject> subjects { get; set; }
-        //public decimal AvgMark { get;}
+        public int ID { get; set; } = id;
+        public string Name { get; set; } = name;
+        public string Surname { get; set; } = surname;
+        public int Age { get; set; } = age;
+        public int Grade { get; set; } = grade;
+        public List<Subject> subjects { get; set; } = subjects;
+        public decimal AvgMark { get; } = avgMark;
 
-        public Student(int id, string name, string surname, int age, int grade, List<Subject> subjects)
+        public decimal CalcAverage()
         {
-            ID = id;
-            Name = name;
-            Surname = surname;
-            Age = age;
-            Grade = grade;
-            this.subjects = subjects;
-            //AvgMark = avgMark;
+            if (subjects == null || subjects.Count == 0)
+
+                return 0;
+
+            decimal totalMarks = 0;
+
+            int noSubjects = subjects.Count;
+
+            foreach (var subject in subjects)
+            {
+                totalMarks += subject.marks;
+            }
+
+            decimal avg = totalMarks / noSubjects;
+
+            return avg;
         }
+
+        public string GetAcademic()
+        {
+            decimal Markresults = CalcAverage();
+
+            return Markresults switch
+            {
+                >= 90 => "Distinction",
+                >= 75 => "Merit",
+                >= 50 => "Pass",
+                _ => "Fail"
+            };
+        }
+
     }
 }
