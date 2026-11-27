@@ -1,6 +1,6 @@
 ﻿namespace StudentMS.Models
 {
-    public class Student(int id, string name, string surname, int age, int grade, decimal avgMark, List<Subject> subjects)
+    public class Student(int id, string name, string surname, int age, int grade, List<Subject> subjects)
     {
 
         public int ID { get; set; } = id;
@@ -8,8 +8,8 @@
         public string Surname { get; set; } = surname;
         public int Age { get; set; } = age;
         public int Grade { get; set; } = grade;
-        public List<Subject> subjects { get; set; } = subjects;
-        public decimal AvgMark { get; } = avgMark;
+        public List<Subject> Subjects { get; set; } = subjects;
+        public decimal AvgMark => CalcAverage();
 
         public decimal CalcAverage()
         {
